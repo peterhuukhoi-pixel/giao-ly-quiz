@@ -1,6 +1,0 @@
-GIÁO LÝ QUIZ 0.9
-1. Tải tất cả tệp trong ZIP vào gốc kho GitHub (gồm cả .github/workflows/suy-niem.yml và scripts/update_reflections.py).
-2. Vào Settings > Actions > General > Workflow permissions, bật Read and write permissions nếu muốn workflow tự commit JSON.
-3. Vào Actions > Cap nhat suy niem > Run workflow để chạy thử.
-4. Bài chính chỉ xuất hiện khi RSS tìm được Manna; nếu không, trang hiển thị nguồn liên kết, không giả mạo bài hôm nay.
-5. Giữ nguyên GitHub Pages main /(root).
