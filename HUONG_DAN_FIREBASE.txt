@@ -1,0 +1,30 @@
+GIÁO LÝ QUIZ 1.1 – ĐĂNG NHẬP GOOGLE VÀ ĐỒNG BỘ
+
+1. Vào https://console.firebase.google.com/ và tạo dự án Firebase.
+2. Project settings > Your apps > Add app > Web (biểu tượng </>).
+   Cấu hình firebase-config.js đã được điền từ ảnh Firebase Console bạn cung cấp.
+   Nếu Firebase tạo ứng dụng Web mới, cần cập nhật cấu hình tương ứng.
+   Đây là thông tin cấu hình ứng dụng, không phải mật khẩu hay private key.
+3. Authentication > Sign-in method > Google > Enable. Chọn email hỗ trợ và Save.
+4. Authentication > Settings > Authorized domains > thêm:
+   peterhuukhoi-pixel.github.io
+   (và tên miền riêng nếu bạn có). Không nhập https:// hoặc dấu /.
+5. Firestore Database > Create database. Chọn vị trí và tạo cơ sở dữ liệu.
+6. Firestore Database > Rules: thay toàn bộ bằng nội dung file firestore.rules rồi Publish.
+   Không dùng quy tắc cho phép tất cả người dùng đọc/ghi.
+7. Đưa TOÀN BỘ tệp và thư mục trong ZIP lên thư mục GỐC của nhánh main trên GitHub.
+   KHÔNG tải nguyên thư mục chứa các tệp vào repo, vì GitHub Pages đang đọc từ /(root).
+8. Mở https://peterhuukhoi-pixel.github.io/giao-ly-quiz/ rồi nhấn Đăng nhập Google.
+   Kiểm tra bằng cách làm một bài trên Mac, đăng nhập cùng Gmail trên iPhone.
+
+LƯU Ý:
+- Tệp ZIP không có thông tin Firebase của bạn. Trước khi cấu hình, nút đăng nhập chỉ hiện hướng dẫn.
+- Dữ liệu cũ trong trình duyệt được hợp nhất với dữ liệu đám mây ở lần đăng nhập đầu.
+- Đăng nhập trên máy dùng chung: nhớ Đăng xuất. Trên máy dùng chung, dữ liệu đã lưu cục bộ vẫn có thể tồn tại.
+- Đồng bộ hiện gồm lịch sử học/thi, câu đánh dấu, câu sai và câu hỏi JSON tự nhập.
+- Bản nháp bài văn chưa có chức năng lưu trong ứng dụng, nên chưa thể đồng bộ.
+- Nếu nhiều máy thay đổi dữ liệu đồng thời, lần ghi sau có thể ghi đè một phần thay đổi.
+- Không đưa khóa dịch vụ Firebase Admin hoặc thông tin bí mật vào GitHub.
+
+LƯU Ý BẢN 1.1 ĐÃ CẤU HÌNH: Chỉ có thể xác nhận đăng nhập và đồng bộ sau khi triển khai và thử nghiệm trực tiếp.
+Quy tắc Firestore đã xuất bản dạng users/{userId}/... trong ảnh là tương thích với users/{uid}/private/progress.
