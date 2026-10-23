@@ -1,6 +1,6 @@
 // Firebase Web App configuration (public client identifiers; not an admin credential).
 window.GLQ_FIREBASE_CONFIG = {
-  apiKey: "AIzaSyDWhTQg9u30c41hQAfUKjMXEkS5cnvH-BA",
+  apiKey: "AIzaSyDwhTQg9u30c41hQAfUKjMXEkS5cnvH-BA",
   authDomain: "giao-ly-quiz.firebaseapp.com",
   projectId: "giao-ly-quiz",
   storageBucket: "giao-ly-quiz.firebasestorage.app",
