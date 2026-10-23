@@ -1,0 +1,38 @@
+NHẬT KÝ CÁ NHÂN — QUY TẮC FIRESTORE BẮT BUỘC
+
+Trang nhat-ky.html lưu nội dung tại:
+users/{uid}/journal/{YYYY-MM-DD}
+
+QUAN TRỌNG: JavaScript trên trình duyệt không thể tự bảo đảm rằng người khác không đọc được dữ liệu. Cần áp dụng quy tắc Firestore trong Firebase Console → Firestore Database → Rules.
+
+Nếu dự án chưa có quy tắc khác, có thể dùng:
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+
+Nếu dự án ĐÃ CÓ quy tắc đang hoạt động, KHÔNG thay toàn bộ bằng ví dụ trên. Hãy bổ sung quy tắc tương ứng với nhật ký vào bên trong service cloud.firestore / match databases, giữ nguyên các quy tắc cần thiết khác:
+
+match /users/{userId}/journal/{entryId} {
+  allow read, delete: if request.auth != null && request.auth.uid == userId;
+  allow create, update: if request.auth != null
+    && request.auth.uid == userId
+    && request.resource.data.keys().hasOnly(['date','title','content','updatedAt'])
+    && request.resource.data.date == entryId
+    && request.resource.data.title is string
+    && request.resource.data.content is string;
+}
+
+LƯU Ý: Nếu có quy tắc rộng hơn cho phép mọi người đọc users/** thì quy tắc cụ thể trên KHÔNG chặn được truy cập, vì Firestore kết hợp các quy tắc cho phép theo phép OR. Phải rà soát và gỡ các quyền công khai xung đột.
+
+Kiểm tra bằng Rules Playground / Emulator với hai tài khoản khác nhau:
+- UID A được đọc/ghi users/A/journal/2026-10-23
+- UID B phải bị từ chối khi đọc/ghi users/A/journal/2026-10-23
+- Khách chưa đăng nhập phải bị từ chối.
+
+Trang nhật ký không lưu nội dung vào localStorage. Nhật ký là riêng tư theo quyền tài khoản, không phải mã hóa đầu cuối. Người quản trị Firebase có quyền đặc biệt vẫn có thể truy cập dữ liệu.
