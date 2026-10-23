@@ -83,3 +83,18 @@ else {
     });
   } catch(e) {console.error(e);showStatus('Không tải được Firebase · dữ liệu vẫn lưu trên máy');}
 }
+
+/* Lối vào Nhật ký cá nhân trên trang chính. Nhật ký vẫn yêu cầu đăng nhập riêng. */
+(function addJournalEntry(){
+  if(document.getElementById('glq-journal-link'))return;
+  const link=document.createElement('a');
+  link.id='glq-journal-link';
+  link.href='./nhat-ky.html';
+  link.textContent='📖 Nhật ký cá nhân';
+  link.setAttribute('aria-label','Mở nhật ký cá nhân theo tài khoản Google');
+  Object.assign(link.style,{display:'inline-block',margin:'10px 8px',padding:'10px 16px',borderRadius:'12px',background:'#e4f2eb',color:'#116149',fontWeight:'700',textDecoration:'none',border:'1px solid #b5dac8'});
+  const account=document.getElementById('account-button');
+  const header=account?.closest('header')||account?.parentElement;
+  if(header)header.appendChild(link);
+  else document.body.insertBefore(link,document.body.firstChild);
+})();
